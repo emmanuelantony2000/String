@@ -1,4 +1,4 @@
-//version 1.2.2(Beta)
+//version 1.2.3(Beta)
 //Author: Emmanuel Antony
 
 #include<iostream.h>
@@ -121,10 +121,26 @@ public:
         (*this) = strReplace(o, n, (*this));
     }
 
+    String replace(char o, char n)
+    {
+        String s;
+        s = (*this);
+        s.replace(o, n);
+        return s;
+    }
+
     void replace(char oldChar[], char newChar[])
     {
         String o(oldChar), n(newChar);
         (*this) = strReplace(o, n, (*this));
+    }
+
+    String replace(char o[], char n[])
+    {
+        String s;
+        s = (*this);
+        s.replace(o, n);
+        return s;
     }
 
     void replace(char oldChar, char newChar[])
@@ -133,10 +149,26 @@ public:
         (*this) = strReplace(o, n, (*this));
     }
 
+    String replace(char o, char n[])
+    {
+        String s;
+        s = (*this);
+        s.replace(o, n);
+        return s;
+    }
+
     void replace(char oldChar[], char newChar)
     {
         String o(oldChar), n(newChar);
         (*this) = strReplace(o, n, (*this));
+    }
+
+    String replace(char o[], char n)
+    {
+        String s;
+        s = (*this);
+        s.replace(o, n);
+        return s;
     }
 
     void replace(String oldChar, char newChar)
@@ -145,10 +177,26 @@ public:
         (*this) = strReplace(oldChar, n, (*this));
     }
 
+    String replace(String o, char n)
+    {
+        String s;
+        s = (*this);
+        s.replace(o, n);
+        return s;
+    }
+
     void replace(String oldChar, char newChar[])
     {
         String n(newChar);
         (*this) = strReplace(oldChar, n, (*this));
+    }
+
+    String replace(String o, char n[])
+    {
+        String s;
+        s = (*this);
+        s.replace(o, n);
+        return s;
     }
 
     void replace(char oldChar, String newChar)
@@ -157,10 +205,26 @@ public:
         (*this) = strReplace(o, newChar, (*this));
     }
 
+    String replace(char o, String n)
+    {
+        String s;
+        s = (*this);
+        s.replace(o, n);
+        return s;
+    }
+
     void replace(char oldChar[], String newChar)
     {
         String o(oldChar);
         (*this) = strReplace(o, newChar, (*this));
+    }
+
+    String replace(char o[], String n)
+    {
+        String s;
+        s = (*this);
+        s.replace(o, n);
+        return s;
     }
 
     void replace(String oldChar, String newChar)
@@ -168,9 +232,25 @@ public:
         (*this) = strReplace(oldChar, newChar, (*this));
     }
 
+    String replace(String o, String n)
+    {
+        String s;
+        s = (*this);
+        s.replace(o, n);
+        return s;
+    }
+
     void change(int n, char c)
     {
         this->str[n] = c;
+    }
+
+    String change(int n, char c)
+    {
+        String s;
+        s = (*this);
+        s.change(n, c);
+        return s;
     }
 
     void change(int a, int b, char c[])
@@ -180,9 +260,25 @@ public:
         (*this) = strChange(a, b, (*this), s);
     }
 
+    String change(int a, int b, char c[])
+    {
+        String s;
+        s = (*this);
+        s.change(a, b, c);
+        return s;
+    }
+
     void change(int a, int b, String s)
     {
         (*this) = strChange(a, b, (*this), s);
+    }
+
+    String change(int a, int b, String s)
+    {
+        String s;
+        s = (*this);
+        s.change(a, b, s);
+        return s;
     }
 
     int instance(char c)
@@ -202,19 +298,68 @@ public:
         return strInstance((*this), s);
     }
 
-    int firstIndexChar(char c)
+    int firstIndex(char c)
     {
-        return strFirstIndexChar((*this), c);
+        String s(c);
+        return strFirstIndex((*this), s);
     }
 
-    int lastIndexChar(char c)
+    void firstIndex(char c[])
     {
-        return strLastIndexChar((*this), c);
+        String s(c);
+        return strFirstIndex((*this), s);
     }
 
-    void indexesChar(char c, int n[])
+    void firstIndex(String s)
     {
-        strIndexesChar((*this), c, n);
+        return strFirstIndex((*this), s);
+    }
+
+    int lastIndex(char c)
+    {
+        String s(c);
+        return strLastIndex((*this), s);
+    }
+
+    int lastIndex(char c[])
+    {
+        String s(c);
+        return strLastIndex((*this), s);
+    }
+
+    int lastIndex(String s)
+    {
+        return strLastIndex((*this), s``);
+    }
+
+    void indexes(char c, int n[])
+    {
+        String s(c);
+        strIndexes((*this), s, n);
+    }
+
+    void indexes(char c[], int n[])
+    {
+        String s(c);
+        strIndexes((*this), s, n);
+    }
+
+    void indexes(String s, int n[])
+    {
+        strIndexes((*this), s, n);
+    }
+
+    void reverse()
+    {
+        strReverse((*this));
+    }
+
+    String reverse()
+    {
+        String s;
+        s = (*this);
+        s.reverse();
+        return s;
     }
 
     int parseInt()
@@ -269,14 +414,51 @@ public:
         strToLower((*this));
     }
 
+    String toLower()
+    {
+        String s;
+        s = (*this);
+        s.toLower();
+        return s;
+    }
+
     void toUpper()
     {
         strToUpper((*this));
     }
 
+    String toUpper()
+    {
+        String s;
+        s = (*this);
+        s.toLower();
+        return s;
+    }
+
     void capitalize()
     {
         strCapitalize((*this));
+    }
+
+    String capitalize()
+    {
+        String s;
+        s = (*this);
+        s.capitalize();
+        return s;
+    }
+
+    void decapitalize()
+    {
+        strDecapitalize((*this));
+    }
+
+    String decapitalize()
+    {
+        String s;
+        s = (*this);
+        s.decapitalize();
+        return s;
     }
 
     String& operator = (String& temp)
@@ -418,6 +600,11 @@ public:
         s.initialise(c);
         return strEqual(temp, s);
     }
+
+    char operator [] (int n)
+    {
+        return this->str[i];
+    }
 };
 
 int strLength(char str[500])
@@ -531,11 +718,12 @@ int strInstance(String a, String b)
     return k;
 }
 
-int strFirstIndexChar(String s, char c)
+int strFirstIndex(String a, String b)
 {
-    for(int i = 0; i < s.length(); i++)
+    int i, j = b.length();
+    for(i = 0; i < a.length() - j; i++)
     {
-        if(s.charAt(i) == c)
+        if(s.substring(i, i + j) == b)
         {
             return i;
         }
@@ -543,11 +731,12 @@ int strFirstIndexChar(String s, char c)
     return -1;
 }
 
-int strLastIndexChar(String s, char c)
+int strLastIndex(String a, String b)
 {
-    for(int i = s.length(); i >= 0; i--)
+    int i, j = b.length();
+    for(int i = a.length() - j; i >= 0; i--)
     {
-        if(s.charAt(i) == c)
+        if(a.substring(i - j, i) == b)
         {
             return i;
         }
@@ -555,15 +744,15 @@ int strLastIndexChar(String s, char c)
     return -1;
 }
 
-void strIndexesChar(String s, char c, int n[])
+void strIndexes(String a, String b, int n[])
 {
-    int i, j = 0;
-    for(i = 0; i < s.length(); i++)
+    int i, j = b.length(), count = 0;
+    for(i = 0; i < a.length() - j; i++)
     {
-        if(s.charAt(i) == c)
+        if(a.substring(i, i + j) == b)
         {
-            n[j] = i;
-            j++;
+            n[count] = i;
+            count++;
         }
     }
 }
@@ -763,6 +952,39 @@ String strChange(int start, int end, String a, String b)
     result = "";
     result += a.substring(0, start) + b + a.substring(end, a.length());
     return result;
+}
+
+String strTrim(String s)
+{
+    int i, j;
+    for(i = 0; s.charAt(i) == ' '; i++);
+    for(j = s.length() - 1; s.charAt(j) == ' '; j--);
+    return s.substring(i, j + 1);
+}
+
+String strTrimSpace(String s)
+{
+    String result;
+    result = "";
+    for(int i = 0; i < s.length(); i++)
+    {
+        if(s.charAt(i) == ' ')
+        {
+            continue;
+        }
+        result += s.charAt(i);
+    }
+    return result;
+}
+
+String strTrimSpecified(String a, String b)
+{
+
+}
+
+String[] strSeparate(String a, String b)
+{
+
 }
 
 int charIsInteger(char c)
