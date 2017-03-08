@@ -1,4 +1,4 @@
-//version 1.3(Beta)
+//version 1.3.1(Beta)
 //Author: Emmanuel Antony
 
 #include<iostream.h>
@@ -39,7 +39,8 @@ void strDecapitalize(String& s);
 void strReverse(String& s);
 String strChange(int start, int end, String a, String b);
 String strTrim(String s);
-String strTrimSpecified(String a, String b)
+String strTrimSpecified(String a, String b);
+//String[] strSeparate(String a, String b);
 int charIsInteger(char c);
 int charIsAlphabet(char c);
 int charIsSpecial(char c);
@@ -126,7 +127,7 @@ public:
         (*this) = strReplace(o, n, (*this));
     }
 
-    String replace(char o, char n)
+    String replace(char o, char n, int num)
     {
         String s;
         s = (*this);
@@ -140,7 +141,7 @@ public:
         (*this) = strReplace(o, n, (*this));
     }
 
-    String replace(char o[], char n[])
+    String replace(char o[], char n[], int num)
     {
         String s;
         s = (*this);
@@ -154,7 +155,7 @@ public:
         (*this) = strReplace(o, n, (*this));
     }
 
-    String replace(char o, char n[])
+    String replace(char o, char n[], int num)
     {
         String s;
         s = (*this);
@@ -168,7 +169,7 @@ public:
         (*this) = strReplace(o, n, (*this));
     }
 
-    String replace(char o[], char n)
+    String replace(char o[], char n, int num)
     {
         String s;
         s = (*this);
@@ -182,7 +183,7 @@ public:
         (*this) = strReplace(oldChar, n, (*this));
     }
 
-    String replace(String o, char n)
+    String replace(String o, char n, int num)
     {
         String s;
         s = (*this);
@@ -196,7 +197,7 @@ public:
         (*this) = strReplace(oldChar, n, (*this));
     }
 
-    String replace(String o, char n[])
+    String replace(String o, char n[], int num)
     {
         String s;
         s = (*this);
@@ -210,7 +211,7 @@ public:
         (*this) = strReplace(o, newChar, (*this));
     }
 
-    String replace(char o, String n)
+    String replace(char o, String n, int num)
     {
         String s;
         s = (*this);
@@ -224,7 +225,7 @@ public:
         (*this) = strReplace(o, newChar, (*this));
     }
 
-    String replace(char o[], String n)
+    String replace(char o[], String n, int num)
     {
         String s;
         s = (*this);
@@ -237,7 +238,7 @@ public:
         (*this) = strReplace(oldChar, newChar, (*this));
     }
 
-    String replace(String o, String n)
+    String replace(String o, String n, int num)
     {
         String s;
         s = (*this);
@@ -250,7 +251,7 @@ public:
         this->str[n] = c;
     }
 
-    String change(int n, char c)
+    String change(int n, char c, int num)
     {
         String s;
         s = (*this);
@@ -265,7 +266,7 @@ public:
         (*this) = strChange(a, b, (*this), s);
     }
 
-    String change(int a, int b, char c[])
+    String change(int a, int b, char c[], int n)
     {
         String s;
         s = (*this);
@@ -278,12 +279,12 @@ public:
         (*this) = strChange(a, b, (*this), s);
     }
 
-    String change(int a, int b, String s)
+    String change(int a, int b, String s, int n)
     {
-        String s;
-        s = (*this);
-        s.change(a, b, s);
-        return s;
+        String r;
+        r = (*this);
+        r.change(a, b, s);
+        return r;
     }
 
     int instance(char c)
@@ -309,13 +310,13 @@ public:
         return strFirstIndex((*this), s);
     }
 
-    void firstIndex(char c[])
+    int firstIndex(char c[])
     {
         String s(c);
         return strFirstIndex((*this), s);
     }
 
-    void firstIndex(String s)
+    int firstIndex(String s)
     {
         return strFirstIndex((*this), s);
     }
@@ -359,7 +360,7 @@ public:
         strReverse((*this));
     }
 
-    String reverse()
+    String reverse(int n)
     {
         String s;
         s = (*this);
@@ -372,7 +373,7 @@ public:
         (*this) = strTrim(*this);
     }
 
-    String trim()
+    String trim(int n)
     {
         String s;
         s = strTrim(*this);
@@ -384,7 +385,7 @@ public:
         (*this) = strTrimSpecified((*this), s);
     }
 
-    String trimSpecified(String r)
+    String trimSpecified(String r, int n)
     {
         String s;
         s = strTrimSpecified((*this), r);
@@ -443,7 +444,7 @@ public:
         strToLower((*this));
     }
 
-    String toLower()
+    String toLower(int n)
     {
         String s;
         s = (*this);
@@ -456,7 +457,7 @@ public:
         strToUpper((*this));
     }
 
-    String toUpper()
+    String toUpper(int n)
     {
         String s;
         s = (*this);
@@ -469,7 +470,7 @@ public:
         strCapitalize((*this));
     }
 
-    String capitalize()
+    String capitalize(int n)
     {
         String s;
         s = (*this);
@@ -482,13 +483,24 @@ public:
         strDecapitalize((*this));
     }
 
-    String decapitalize()
+    String decapitalize(int n)
     {
         String s;
         s = (*this);
         s.decapitalize();
         return s;
     }
+
+    /*
+    void separate(String s, String result[], int n)
+    {
+        String temp[] = strSeparate((*this), s);
+        for(int i = 0; i < n; i++)
+        {
+            result[i] = temp[i];
+        }
+    }
+    */
 
     String& operator = (String& temp)
     {
@@ -616,6 +628,42 @@ public:
         return strEqual((*this), s);
     }
 
+    int operator != (String s)
+    {
+        if((*this) == s)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
+    int operator != (char c[])
+    {
+        if((*this) == c)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
+    int operator != (char c)
+    {
+        if((*this) == c)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
     friend operator == (char c[], String temp)
     {
         String s;
@@ -630,9 +678,33 @@ public:
         return strEqual(temp, s);
     }
 
+    friend operator != (char c[], String temp)
+    {
+        if(c == temp)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
+    friend operator != (char c, String temp)
+    {
+        if(c == temp)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
     char operator [] (int n)
     {
-        return this->str[i];
+        return this->str[n];
     }
 };
 
@@ -674,6 +746,16 @@ void strFlush(char a[charLengthConstant])
     }
 }
 
+/*
+void strArrayFlush(String s[], int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        s[i].flush();
+    }
+}
+*/
+
 void strInitialise(char str[charLengthConstant], char s[])
 {
     strFlush(str);
@@ -702,7 +784,7 @@ String strReplace(String o, String n, String s)
         if((s.substring(i, i + j) == o) && (i < s.length() - j))
         {
             r += n;
-            i = i + j;
+            i = i + j - 1;
         }
         else
         {
@@ -752,7 +834,7 @@ int strFirstIndex(String a, String b)
     int i, j = b.length();
     for(i = 0; i < a.length() - j; i++)
     {
-        if(s.substring(i, i + j) == b)
+        if(a.substring(i, i + j) == b)
         {
             return i;
         }
@@ -763,7 +845,7 @@ int strFirstIndex(String a, String b)
 int strLastIndex(String a, String b)
 {
     int i, j = b.length();
-    for(int i = a.length() - j; i >= 0; i--)
+    for(i = a.length() - j; i >= 0; i--)
     {
         if(a.substring(i - j, i) == b)
         {
@@ -832,7 +914,7 @@ double strParseDouble(String s)
                 ad = 0.1;
                 continue;
             }
-            n = (n * bd) + (charToInteger(s.charAt(i))) * ad);
+            n = (n * bd) + (charToInteger(s.charAt(i)) * ad);
             ad = ad * ad;
         }
         return n;
@@ -949,7 +1031,7 @@ void strCapitalize(String& s)
     {
         if(s.charAt(i - 1) == ' ')
         {
-            if(charisLower(s.charAt(i)))
+            if(charIsLower(s.charAt(i)))
             {
                 s.change(i, charToUpper(s.charAt(i)));
             }
@@ -967,7 +1049,7 @@ void strDecapitalize(String& s)
     {
         if(s.charAt(i - 1) == ' ')
         {
-            if(charisUpper(s.charAt(i)))
+            if(charIsUpper(s.charAt(i)))
             {
                 s.change(i, charToLower(s.charAt(i)));
             }
@@ -1005,14 +1087,41 @@ String strTrim(String s)
 String strTrimSpecified(String a, String b)
 {
     String result;
-    result = a.replace(String b, "");
+    result = a.replace(b, "", 0);
     return result;
 }
 
+/*
 String[] strSeparate(String a, String b)
 {
-
+    String result[100], r;
+    strArrayFlush(result, 100);
+    r = "";
+    int i, j = b.length(), count = 0;
+    for(i = 0; i < a.length(); i++)
+    {
+        if(i < a.length() - j)
+        {
+            if(a.substring(i, i+j) == b)
+            {
+                result[count] = r;
+                count++;
+                r = "";
+            }
+            else
+            {
+                r += a.charAt(i);
+            }
+        }
+        else
+        {
+            r += a.charAt(i);
+        }
+    }
+    result[count] = r;
+    return result;
 }
+*/
 
 int charIsInteger(char c)
 {
@@ -1038,7 +1147,7 @@ int charIsAlphabet(char c)
     }
 }
 
-int charIsSpecial(c)
+int charIsSpecial(char c)
 {
     if(c == '.' || c == '?' || c == '!' || c == ',')
     {
@@ -1093,12 +1202,12 @@ int charToInteger(char c)
 
 char charToLower(char c)
 {
-    return (char)(c + 32)
+    return (char)(c + 32);
 }
 
 char charToUpper(char c)
 {
-    return (char)(c - 32)
+    return (char)(c - 32);
 }
 
 void main()
