@@ -1,26 +1,28 @@
-//version 1.2.3(Beta)
+//version 1.3(Beta)
 //Author: Emmanuel Antony
 
 #include<iostream.h>
 #include<conio.h>
 #include<stdio.h>
 
+const int charLengthConstant = 500;
+
 class String;
 
-int strLength(char str[500]);
+int strLength(char str[charLengthConstant]);
 int strLengthNormal(char s[]);
-void strAdd(char str[500], char temp[500]);
-void strCopy(char a[500], char b[500]);
-void strFlush(char a[500]);
-void strInitialise(char str[500], char s[]);
+void strAdd(char str[charLengthConstant], char temp[charLengthConstant]);
+void strCopy(char a[charLengthConstant], char b[charLengthConstant]);
+void strFlush(char a[charLengthConstant]);
+void strInitialise(char str[charLengthConstant], char s[]);
 void strMultiply(String& s, int n);
 String strReplace(String o, String n, String s);
 int strEqual(String a, String b);
-void strSubstring(char c1[500], char c2[500], int a, int b);
+void strSubstring(char c1[charLengthConstant], char c2[charLengthConstant], int a, int b);
 int strInstance(String a, String b);
-int strFirstIndexChar(String s, char c);
-int strLastIndexChar(String s, char c);
-void strIndexesChar(String s, char c, int n[]);
+int strFirstIndex(String a, String b);
+int strLastIndex(String a, String b);
+void strIndexes(String a, String b, int n[]);
 String strIntToChar(int n);
 int strParseInt(String s);
 double strParseDouble(String s);
@@ -34,10 +36,13 @@ void strToLower(String& s);
 void strToUpper(String& s);
 void strCapitalize(String& s);
 void strDecapitalize(String& s);
+void strReverse(String& s);
 String strChange(int start, int end, String a, String b);
+String strTrim(String s);
+String strTrimSpecified(String a, String b)
 int charIsInteger(char c);
 int charIsAlphabet(char c);
-int charIsSpecial(c);
+int charIsSpecial(char c);
 int charIsAlphanumeric(char c);
 int charIsLower(char c);
 int charIsUpper(char c);
@@ -48,7 +53,7 @@ char charToUpper(char c);
 class String
 {
 private:
-    char str[500];
+    char str[charLengthConstant];
 
 public:
     String()
@@ -329,7 +334,7 @@ public:
 
     int lastIndex(String s)
     {
-        return strLastIndex((*this), s``);
+        return strLastIndex((*this), s);
     }
 
     void indexes(char c, int n[])
@@ -359,6 +364,30 @@ public:
         String s;
         s = (*this);
         s.reverse();
+        return s;
+    }
+
+    void trim()
+    {
+        (*this) = strTrim(*this);
+    }
+
+    String trim()
+    {
+        String s;
+        s = strTrim(*this);
+        return s;
+    }
+
+    void trimSpecified(String s)
+    {
+        (*this) = strTrimSpecified((*this), s);
+    }
+
+    String trimSpecified(String r)
+    {
+        String s;
+        s = strTrimSpecified((*this), r);
         return s;
     }
 
@@ -607,7 +636,7 @@ public:
     }
 };
 
-int strLength(char str[500])
+int strLength(char str[charLengthConstant])
 {
     for(int i = 0; str[i] != '\0'; i++);
     return i;
@@ -619,7 +648,7 @@ int strLengthNormal(char s[])
     return i;
 }
 
-void strAdd(char str[500], char temp[500])
+void strAdd(char str[charLengthConstant], char temp[charLengthConstant])
 {
     int i, j = strLength(str);
     for(i = 0; temp[i] != '\0'; i++)
@@ -628,7 +657,7 @@ void strAdd(char str[500], char temp[500])
     }
 }
 
-void strCopy(char a[500], char b[500])
+void strCopy(char a[charLengthConstant], char b[charLengthConstant])
 {
     strFlush(a);
     for(int i = 0; b[i] != '\0'; i++)
@@ -637,15 +666,15 @@ void strCopy(char a[500], char b[500])
     }
 }
 
-void strFlush(char a[500])
+void strFlush(char a[charLengthConstant])
 {
-    for(int i = 0; i < 500; i++)
+    for(int i = 0; i < charLengthConstant; i++)
     {
         a[i] = '\0';
     }
 }
 
-void strInitialise(char str[500], char s[])
+void strInitialise(char str[charLengthConstant], char s[])
 {
     strFlush(str);
     for(int i = 0; s[i] != '\0'; i++)
@@ -695,7 +724,7 @@ int strEqual(String a, String b)
     return 1;
 }
 
-void strSubstring(char c1[500], char c2[500], int a, int b)
+void strSubstring(char c1[charLengthConstant], char c2[charLengthConstant], int a, int b)
 {
     int i, j = 0;
     for(i = a; i < b; i++)
@@ -946,6 +975,17 @@ void strDecapitalize(String& s)
     }
 }
 
+void strReverse(String& s)
+{
+    String result;
+    result = "";
+    for(int i = s.length() - 1; i >= 0; i--)
+    {
+        result += s.charAt(i);
+    }
+    s = result;
+}
+
 String strChange(int start, int end, String a, String b)
 {
     String result;
@@ -962,24 +1002,11 @@ String strTrim(String s)
     return s.substring(i, j + 1);
 }
 
-String strTrimSpace(String s)
-{
-    String result;
-    result = "";
-    for(int i = 0; i < s.length(); i++)
-    {
-        if(s.charAt(i) == ' ')
-        {
-            continue;
-        }
-        result += s.charAt(i);
-    }
-    return result;
-}
-
 String strTrimSpecified(String a, String b)
 {
-
+    String result;
+    result = a.replace(String b, "");
+    return result;
 }
 
 String[] strSeparate(String a, String b)
