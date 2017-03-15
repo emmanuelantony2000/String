@@ -1,4 +1,4 @@
-//version 1.3.1(Beta)
+//version 1.4(Beta)
 //Author: Emmanuel Antony
 
 #include<iostream.h>
@@ -14,6 +14,7 @@ int strLengthNormal(char s[]);
 void strAdd(char str[charLengthConstant], char temp[charLengthConstant]);
 void strCopy(char a[charLengthConstant], char b[charLengthConstant]);
 void strFlush(char a[charLengthConstant]);
+void strArrayFlush(String *s, int n);
 void strInitialise(char str[charLengthConstant], char s[]);
 void strMultiply(String& s, int n);
 String strReplace(String o, String n, String s);
@@ -24,8 +25,8 @@ int strFirstIndex(String a, String b);
 int strLastIndex(String a, String b);
 void strIndexes(String a, String b, int n[]);
 String strIntToChar(int n);
-int strParseInt(String s);
-double strParseDouble(String s);
+int strToInt(String s);
+double strToDouble(String s);
 int strIsInteger(String s);
 int strIsDouble(String s);
 int strIsAlphabet(String s);
@@ -40,7 +41,8 @@ void strReverse(String& s);
 String strChange(int start, int end, String a, String b);
 String strTrim(String s);
 String strTrimSpecified(String a, String b);
-//String[] strSeparate(String a, String b);
+String* strSeparate(String a, String b);
+void strArrayAssign(String* a, String* b, int n);
 int charIsInteger(char c);
 int charIsAlphabet(char c);
 int charIsSpecial(char c);
@@ -104,6 +106,18 @@ public:
     {
         strFlush(this->str);
         gets(this->str);
+    }
+
+    void inputWord()
+    {
+        strFlush(this->str);
+        cin>>this->str;
+    }
+
+    void inputChar()
+    {
+        (*this).input();
+        (*this) = (*this).charAt(0);
     }
 
     void output()
@@ -392,14 +406,14 @@ public:
         return s;
     }
 
-    int parseInt()
+    int toInteger()
     {
-        return strParseInt((*this));
+        return strToInt((*this));
     }
 
-    double parseDouble()
+    double toDouble()
     {
-        return strParseDouble((*this));
+        return strToDouble((*this));
     }
 
     String substring(int a, int b)
@@ -491,16 +505,12 @@ public:
         return s;
     }
 
-    /*
-    void separate(String s, String result[], int n)
+    void separate(String s, String *result, int n)
     {
-        String temp[] = strSeparate((*this), s);
-        for(int i = 0; i < n; i++)
-        {
-            result[i] = temp[i];
-        }
+        String *temp = new String[100];
+        temp = &(strSeparate((*this), s));
+        strArrayAssign(result, temp, n);
     }
-    */
 
     String& operator = (String& temp)
     {
@@ -746,15 +756,13 @@ void strFlush(char a[charLengthConstant])
     }
 }
 
-/*
-void strArrayFlush(String s[], int n)
+void strArrayFlush(String *s, int n)
 {
     for(int i = 0; i < n; i++)
     {
         s[i].flush();
     }
 }
-*/
 
 void strInitialise(char str[charLengthConstant], char s[])
 {
@@ -880,7 +888,7 @@ String strIntToChar(int n)
     return result;
 }
 
-int strParseInt(String s)
+int strToInt(String s)
 {
     if(s.isInteger() == 0)
     {
@@ -897,7 +905,7 @@ int strParseInt(String s)
     }
 }
 
-double strParseDouble(String s)
+double strToDouble(String s)
 {
     if(s.isDouble() == 0)
     {
@@ -1091,10 +1099,10 @@ String strTrimSpecified(String a, String b)
     return result;
 }
 
-/*
-String[] strSeparate(String a, String b)
+String* strSeparate(String a, String b)
 {
-    String result[100], r;
+    String *result = new String[100];
+    String r;
     strArrayFlush(result, 100);
     r = "";
     int i, j = b.length(), count = 0;
@@ -1121,7 +1129,14 @@ String[] strSeparate(String a, String b)
     result[count] = r;
     return result;
 }
-*/
+
+void strArrayAssign(String* a, String* b, int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        a[i] = b[i];
+    }
+}
 
 int charIsInteger(char c)
 {
