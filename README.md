@@ -11,3 +11,5 @@ You can use the .CPP directly inside the programs.
 If you prefer a more modular approach then go for the Header file.
 But be sure to paste the Header file in the BIN folder and include it in the program with the statement #include"STRING.H".
 For the full documentation please visit [wiki](https://github.com/emmanuelantony2000/String/wiki).
+
+Thanks
